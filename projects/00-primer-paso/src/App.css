@@ -1,0 +1,63 @@
+.tw-folloCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: .8rem;
+  column-gap: 10px;
+  padding: 5px;
+}
+
+.tw-folloCard-header {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.tw-folloCard-header img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.tw-folloCard-header-user {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tw-folloCard-header-user strong {
+  font-size: 16px;
+  font-weight: bold;
+}
+.tw-folloCard-header-user span {
+  font-size: 14px;
+  opacity: .6;
+}
+
+.tw-folloCard-aside button {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s ease-in background;
+
+}
+.tw-folloCard-aside button:hover {
+  opacity: .8;
+}
+
+.tw-folloCard-aside.is-following button {
+  background: transparent;
+  color: #fff;
+  width: 120px;
+}
+
+.tw-folloCard-aside.is-following button:hover {
+  background: rgba(255, 0, 0, .178);
+  color: red;
+  border: 1px solid red;
+}
+
