@@ -5,9 +5,6 @@ import { TURNOS } from "./constants"
 import { checkWinner, checkEndGame } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 
-const prueba = [];
-prueba[0] = '5';
-
 function App() {
 	const [board, setBoard] = useState(() => {
 		if (window.localStorage.getItem('board')) {
