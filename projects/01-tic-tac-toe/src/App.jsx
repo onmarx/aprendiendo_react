@@ -5,24 +5,27 @@ import { TURNOS } from "./constants"
 import { checkWinner, checkEndGame } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 
+const prueba = [];
+prueba[0] = '5';
+
 function App() {
 	const [board, setBoard] = useState(() => {
-    if(window.localStorage.getItem('board')){
-      return JSON.parse(window.localStorage.getItem('board'))
-    }
-    return Array(9).fill(null)
-  })
+		if (window.localStorage.getItem('board')) {
+			return JSON.parse(window.localStorage.getItem('board'))
+		}
+		return Array(9).fill(null)
+	})
 	const [turn, setTurn] = useState(() => {
-    if(window.localStorage.getItem('turn')){
-      return window.localStorage.getItem('turn')
-    }
-    return TURNOS.X
-  })
+		if (window.localStorage.getItem('turn')) {
+			return window.localStorage.getItem('turn')
+		}
+		return TURNOS.X
+	})
 	const [winner, setWinner] = useState(null)
 
-	
+
 	const updateBoard = (index) => {
-		if(board[index] || winner) return
+		if (board[index] || winner) return
 		// Actualizar el tablero
 		const newBoard = [...board]
 		newBoard[index] = turn
@@ -30,15 +33,15 @@ function App() {
 		// Cambiar el turno
 		const newTurn = turn === TURNOS.X ? TURNOS.O : TURNOS.X
 		setTurn(newTurn)
-    // Local Storage
-    window.localStorage.setItem('board', JSON.stringify(newBoard))
-    window.localStorage.setItem('turn', newTurn)
+		// Local Storage
+		window.localStorage.setItem('board', JSON.stringify(newBoard))
+		window.localStorage.setItem('turn', newTurn)
 		// Revisar el ganador
 		const newWinner = checkWinner(newBoard);
 		// Los estados son asincronos
-		if(newWinner) {
+		if (newWinner) {
 			setWinner(newWinner)
-		}else if(checkEndGame(newBoard)) {
+		} else if (checkEndGame(newBoard)) {
 			setWinner(false);
 		}
 	}
@@ -47,12 +50,12 @@ function App() {
 		setBoard(Array(9).fill(null))
 		setTurn(TURNOS.X)
 		setWinner(null)
-    window.localStorage.removeItem('board')
-    window.localStorage.removeItem('turn')
+		window.localStorage.removeItem('board')
+		window.localStorage.removeItem('turn')
 
 	}
-	
-  return(
+
+	return (
 		<main className="board">
 			<h1>Tic Tac Toe</h1>
 			<section className="game">
@@ -60,9 +63,9 @@ function App() {
 					board.map((_, index) => {
 						return (
 							<Square
-							key={index}
-							index={index}
-							updateBoard={updateBoard}
+								key={index}
+								index={index}
+								updateBoard={updateBoard}
 							>
 								{board[index]}
 							</Square>
