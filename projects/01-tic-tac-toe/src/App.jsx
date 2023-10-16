@@ -6,8 +6,18 @@ import { checkWinner, checkEndGame } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 
 function App() {
-	const [board, setBoard] = useState(Array(9).fill(null))
-	const [turn, setTurn] = useState(TURNOS.X)
+	const [board, setBoard] = useState(() => {
+    if(window.localStorage.getItem('board')){
+      return JSON.parse(window.localStorage.getItem('board'))
+    }
+    return Array(9).fill(null)
+  })
+	const [turn, setTurn] = useState(() => {
+    if(window.localStorage.getItem('turn')){
+      return window.localStorage.getItem('turn')
+    }
+    return TURNOS.X
+  })
 	const [winner, setWinner] = useState(null)
 
 	
@@ -20,6 +30,9 @@ function App() {
 		// Cambiar el turno
 		const newTurn = turn === TURNOS.X ? TURNOS.O : TURNOS.X
 		setTurn(newTurn)
+    // Local Storage
+    window.localStorage.setItem('board', JSON.stringify(newBoard))
+    window.localStorage.setItem('turn', newTurn)
 		// Revisar el ganador
 		const newWinner = checkWinner(newBoard);
 		// Los estados son asincronos
@@ -34,6 +47,9 @@ function App() {
 		setBoard(Array(9).fill(null))
 		setTurn(TURNOS.X)
 		setWinner(null)
+    window.localStorage.removeItem('board')
+    window.localStorage.removeItem('turn')
+
 	}
 	
   return(
